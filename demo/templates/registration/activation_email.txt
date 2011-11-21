@@ -1,0 +1,1 @@
+http://{{ site }}/arts/accounts/activate/{{ activation_key }}/

@@ -1,0 +1,44 @@
+{% load partition %}
+{% load thumbnail %}
+{% load shorten %}
+<table>
+	{% for sublist in object_list|partition:3 %}
+	<tr>
+		{% for p in sublist %}
+		<td>
+			<table>
+				<tr>
+					<td>
+						{% thumbnail p.image thumb_sizes.medium as im_medium %}
+						<a href="{{ MEDIA_URL }}{{ im_medium}}" title="{{ p.name }}" rel="gallery">
+						{% endthumbnail %}
+						{% thumbnail p.image thumb_sizes.small as im_small %}
+							<img src="{{ MEDIA_URL }}{{ im_small }}" alt="{{ p.name }}" title="Click to zoom" />
+						{% endthumbnail %}
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>{{ p.name|shorten:32 }}</p>
+						<p><a href="{{ p.get_absolute_url }}">Details</a></p>
+					</td>
+				</tr>
+			</table>
+		</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+</table>
+<div>
+	{% if has_previous %}
+	<div>
+    	<a href="?page={{ previous }}">previous</a>
+    </div>
+    {% endif %}
+    {% if has_next %}
+    <div>
+    	<a href="?page={{ next }}">next</a>
+    </div>
+    {% endif %}
+</div>

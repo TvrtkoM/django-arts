@@ -1,0 +1,31 @@
+{% load thumbnail %}
+<div>
+	<div>
+    	<h1><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h1>
+		<div><p>{{ object.pub_date }}</p></div>
+	</div>
+<div>
+	<div>
+		<div>
+			{% thumbnail object.image thumb_sizes.medium as im %}
+			<img src="{{ MEDIA_URL }}{{ im }}" alt="{{ object.name }}" />
+			{% endthumbnail %}
+		</div>
+		<p>by: {{ object.artists_html|safe }}</p>
+		<h3>Description:</h3>
+		<p>{{ object.description }}</p>
+	</div>
+</div>
+</div>
+<div>
+	{% if object.get_next_by_pub_date %}
+	<div>
+    	<a href="{{ object.get_next_by_pub_date.get_absolute_url }}">previous</a>
+    </div>
+    {% endif %}
+    {% if object.get_previous_by_pub_date %}
+    <div>
+    	<a href="{{ object.get_previous_by_pub_date.get_absolute_url }}">next</a>
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,10 @@
+<form action="{% url registration_login %}" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	{% if next %}
+	<input type="hidden" name="next" value="{{ next }}" />
+	{% else %}
+	<input type="hidden" name="next" value="{% url profiles_edit_profile %}" />
+	{% endif %}
+	<a href="{% url auth_password_reset %}">Forgot password?</a>
+</form>

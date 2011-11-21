@@ -1,0 +1,5 @@
+{% for object in object_list %}
+<div>
+	<a href="{{ object.get_absolute_url }}">{{ object.user.username }}</a>
+</div>
+{% endfor %}

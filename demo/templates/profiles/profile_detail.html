@@ -1,0 +1,14 @@
+{% load thumbnail %}
+{% load arts %}
+{{ profile.user.username }}<br /><br />
+{{ profile.about }}
+<br /><br />
+{% thumbnail profile.portrait "600x600" as im %}
+	<img src="{{ MEDIA_URL }}{{ im }}" alt="{{ profile.user.username }}" />
+{% endthumbnail %}
+<br/><br />
+{% for p in profile.user|arts %}
+{% thumbnail p.image "200x200" as im %}
+	<img src="{{ MEDIA_URL }}{{ im }}" alt="{{ p.name }}" />
+{% endthumbnail %}
+{% endfor %}
